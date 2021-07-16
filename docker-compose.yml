@@ -1,13 +1,14 @@
 version: "3.3"
 
 services:
-  persona_game:
-    ports:
-      - 3000:3000
+  office-employee-front:
+    container_name: office-employee-front
     build:
       context: ./
       dockerfile: Dockerfile
     volumes:
-      - ./:/usr/src/app
-      - /usr/src/app/node_modules
-      - /usr/src/app/.next
+      - ./office-employee-front:/usr/src/app/office-employee-front
+      - /usr/src/app/office-employee-front/node_modules
+      - /usr/src/app/office-employee-front/.next
+    ports:
+      - 3000:3000
