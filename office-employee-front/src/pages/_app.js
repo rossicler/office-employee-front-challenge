@@ -22,6 +22,10 @@ function MyApp({ Component, pageProps }) {
           rel="stylesheet"
           href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
         />
+        <link
+          rel="stylesheet"
+          href="https://cdn.jsdelivr.net/themify-icons/0.1.2/css/themify-icons.css"
+        />
       </Head>
       <Provider store={store}>
         <ThemeProvider theme={theme}>
