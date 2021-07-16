@@ -1,6 +1,6 @@
 import React from "react";
 import { MenuItem } from "@material-ui/core";
-import { useForm } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 
 import {
   Form,
@@ -10,6 +10,7 @@ import {
   ButtonsContainer,
 } from "./PersonalForm.style";
 import TextField from "../../inputs/TextField/TextField";
+import SelectField from "../../inputs/SelectField/SelectField";
 import Button from "../../Button/Button";
 import {
   dayValues,
@@ -18,18 +19,23 @@ import {
 } from "../../../../utils/bithValues";
 
 const PersonalForm = (props) => {
-  const { register, handleSubmit, errors } = useForm();
+  const {
+    register,
+    handleSubmit,
+    control,
+    formState: { errors },
+  } = useForm();
 
   const onSubmit = (data) => {
     console.log(data);
-    // props.changeStepHandler(2);
+    props.changeStepHandler(2);
   };
 
   return (
-    <Form>
+    <Form onSubmit={handleSubmit(onSubmit)}>
       <InputContainer>
         <TextField
-          {...register("firstName")}
+          {...register("firstName", { required: true })}
           label="First name"
           variant="outlined"
           required
@@ -37,74 +43,64 @@ const PersonalForm = (props) => {
       </InputContainer>
 
       <InputContainer>
-        <TextField label="Last name" variant="outlined" required />
+        <TextField
+          {...register("lastName", { required: true })}
+          label="Last name"
+          variant="outlined"
+          required
+        />
       </InputContainer>
 
       <InputContainer>
         <BirthDateContainer>
-          <TextField
+          <SelectField
+            name="birthDay"
+            control={control}
             label="Day"
-            variant="outlined"
-            onChange={() => {}}
-            select
-            // value={1}
-          >
-            {dayValues().map((item) => (
-              <MenuItem key={item.value} value={item.value}>
-                {item.name}
-              </MenuItem>
-            ))}
-          </TextField>
+            options={dayValues()}
+          />
 
-          <TextField
+          <SelectField
+            name="birthMonth"
+            control={control}
             label="Month"
-            variant="outlined"
-            onChange={() => {}}
-            select
-            // value={1}
-          >
-            {monthValues().map((item) => (
-              <MenuItem key={item.value} value={item.value}>
-                {item.name}
-              </MenuItem>
-            ))}
-          </TextField>
+            options={monthValues()}
+          />
 
-          <TextField
+          <SelectField
+            name="birthYear"
+            control={control}
             label="Year"
-            variant="outlined"
-            onChange={() => {}}
-            select
-            // value={2021}
-          >
-            {yearValues().map((item) => (
-              <MenuItem key={item.value} value={item.value}>
-                {item.name}
-              </MenuItem>
-            ))}
-          </TextField>
+            options={yearValues()}
+          />
         </BirthDateContainer>
 
         <ColumnContainer>
-          <TextField
-            variant="outlined"
-            onChange={() => {}}
-            defaultValue={"M"}
-            select
-            value={"M"}
-          >
-            <MenuItem value={"M"}>Male</MenuItem>
-            <MenuItem value={"F"}>Female</MenuItem>
-          </TextField>
+          <SelectField
+            name="gender"
+            control={control}
+            label="Gender"
+            options={[
+              { name: "Male", value: "M" },
+              { name: "Female", value: "F" },
+            ]}
+            defaultValue="M"
+          />
         </ColumnContainer>
       </InputContainer>
 
       <InputContainer>
-        <TextField label="Username" variant="outlined" required />
+        <TextField
+          {...register("username", { required: true })}
+          label="Username"
+          variant="outlined"
+          required
+        />
       </InputContainer>
 
       <InputContainer>
         <TextField
+          {...register("password", { required: true })}
           label="Password"
           variant="outlined"
           type="password"
@@ -113,11 +109,7 @@ const PersonalForm = (props) => {
       </InputContainer>
 
       <ButtonsContainer>
-        <Button
-          color="primary"
-          variant="contained"
-          onClick={() => handleSubmit(onSubmit)}
-        >
+        <Button color="primary" variant="contained" type="submit">
           Next
         </Button>
       </ButtonsContainer>
