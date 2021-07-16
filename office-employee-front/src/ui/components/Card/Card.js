@@ -1,12 +1,19 @@
 import React from "react";
-import { Container } from "@material-ui/core";
+import { Container, Typography } from "@material-ui/core";
 
-import { CardContainer } from "./Card.style";
+import { CardContainer, CardHeader, CardContent } from "./Card.style";
 
 const Card = (props) => {
   return (
     <Container>
-      <CardContainer>{props.children}</CardContainer>
+      <CardContainer>
+        {props.title && (
+          <CardHeader>
+            <Typography variant="h5">{props.title}</Typography>
+          </CardHeader>
+        )}
+        <CardContent>{props.children}</CardContent>
+      </CardContainer>
     </Container>
   );
 };
