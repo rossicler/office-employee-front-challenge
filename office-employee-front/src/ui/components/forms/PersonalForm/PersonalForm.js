@@ -1,11 +1,13 @@
 import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
+import { Typography } from "@material-ui/core";
 
 import {
   ColumnContainer,
-  BirthDateContainer,
+  DateInputsContainer,
+  DateContainer,
   ButtonsContainer,
-} from "./PersonalForm.style";
+} from "../Form/Form.style";
 import TextField from "../../inputs/TextField/TextField";
 import SelectField from "../../inputs/SelectField/SelectField";
 import Button from "../../Button/Button";
@@ -35,80 +37,89 @@ const PersonalForm = ({ personalData, setPersonalData, ...props }) => {
   return (
     <Form>
       <InputContainer>
-        <TextField
-          {...register("firstName", {
-            value: personalData.firstName ? personalData.firstName : undefined,
-            required: true,
-          })}
-          label="First name"
-          variant="outlined"
-          defaultValue={personalData.firstName}
-          error={errors.firstName}
-          required
-        />
-      </InputContainer>
-
-      <InputContainer>
-        <TextField
-          {...register("lastName", {
-            value: personalData.lastName ? personalData.lastName : undefined,
-            required: true,
-          })}
-          label="Last name"
-          variant="outlined"
-          defaultValue={personalData.lastName}
-          error={errors.lastName}
-          required
-        />
-      </InputContainer>
-
-      <InputContainer>
-        <BirthDateContainer>
-          <SelectField
-            name="birthDay"
-            control={control}
-            label="Day"
-            options={dayValues()}
-            defaultValue={personalData.birthDay}
-            error={errors.birthDay}
-            required
-          />
-
-          <SelectField
-            name="birthMonth"
-            control={control}
-            label="Month"
-            options={monthValues()}
-            defaultValue={personalData.birthMonth}
-            error={errors.birthMonth}
-            required
-          />
-
-          <SelectField
-            name="birthYear"
-            control={control}
-            label="Year"
-            options={yearValues()}
-            defaultValue={personalData.birthYear}
-            error={errors.birthYear}
-            required
-          />
-        </BirthDateContainer>
-
         <ColumnContainer>
-          <SelectField
-            name="gender"
-            control={control}
-            label="Gender"
-            options={[
-              { name: "Male", value: "M" },
-              { name: "Female", value: "F" },
-            ]}
-            defaultValue={personalData.gender || "M"}
-            error={errors.gender}
+          <TextField
+            {...register("firstName", {
+              value: personalData.firstName
+                ? personalData.firstName
+                : undefined,
+              required: true,
+            })}
+            label="First name"
+            variant="outlined"
+            defaultValue={personalData.firstName}
+            error={errors.firstName}
             required
           />
         </ColumnContainer>
+
+        <ColumnContainer>
+          <TextField
+            {...register("lastName", {
+              value: personalData.lastName ? personalData.lastName : undefined,
+              required: true,
+            })}
+            label="Last name"
+            variant="outlined"
+            defaultValue={personalData.lastName}
+            error={errors.lastName}
+            required
+          />
+        </ColumnContainer>
+      </InputContainer>
+
+      <InputContainer>
+        <DateContainer>
+          <Typography variant="body2" color="textSecondary" paragraph={true}>
+            Birth Date *
+          </Typography>
+          <DateInputsContainer>
+            <SelectField
+              name="birthDay"
+              control={control}
+              label="Day"
+              options={dayValues()}
+              defaultValue={personalData.birthDay}
+              error={errors.birthDay}
+              required
+            />
+
+            <SelectField
+              name="birthMonth"
+              control={control}
+              label="Month"
+              options={monthValues()}
+              defaultValue={personalData.birthMonth}
+              error={errors.birthMonth}
+              required
+            />
+
+            <SelectField
+              name="birthYear"
+              control={control}
+              label="Year"
+              options={yearValues()}
+              defaultValue={personalData.birthYear}
+              error={errors.birthYear}
+              required
+            />
+          </DateInputsContainer>
+        </DateContainer>
+      </InputContainer>
+
+      <InputContainer>
+        <SelectField
+          name="gender"
+          control={control}
+          label="Gender"
+          options={[
+            { name: "Male", value: "M" },
+            { name: "Female", value: "F" },
+          ]}
+          defaultValue={personalData.gender || "M"}
+          error={errors.gender}
+          required
+        />
       </InputContainer>
 
       <InputContainer>

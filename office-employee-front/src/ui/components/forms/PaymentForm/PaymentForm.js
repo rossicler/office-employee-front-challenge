@@ -1,11 +1,13 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useForm } from "react-hook-form";
+import { Typography } from "@material-ui/core";
 
 import {
   ColumnContainer,
+  DateInputsContainer,
   DateContainer,
   ButtonsContainer,
-} from "./PaymentForm.style";
+} from "../Form/Form.style";
 import TextField from "../../inputs/TextField/TextField";
 import SelectField from "../../inputs/SelectField/SelectField";
 import Button from "../../Button/Button";
@@ -67,55 +69,59 @@ const PaymentForm = ({ paymentData, setPaymentData, ...props }) => {
 
       <InputContainer>
         <DateContainer>
-          <SelectField
-            name="expiryDay"
-            control={control}
-            label="Day"
-            options={dayValues()}
-            defaultValue={paymentData.expiryDay}
-            error={errors.expiryDay}
-            required
-          />
+          <Typography variant="body2" color="textSecondary" paragraph={true}>
+            Expiry Date *
+          </Typography>
+          <DateInputsContainer>
+            <SelectField
+              name="expiryDay"
+              control={control}
+              label="Day"
+              options={dayValues()}
+              defaultValue={paymentData.expiryDay}
+              error={errors.expiryDay}
+              required
+            />
 
-          <SelectField
-            name="expiryMonth"
-            control={control}
-            label="Month"
-            options={monthValues()}
-            defaultValue={paymentData.expiryMonth}
-            error={errors.expiryMonth}
-            required
-          />
+            <SelectField
+              name="expiryMonth"
+              control={control}
+              label="Month"
+              options={monthValues()}
+              defaultValue={paymentData.expiryMonth}
+              error={errors.expiryMonth}
+              required
+            />
 
-          <SelectField
-            name="expiryYear"
-            control={control}
-            label="Year"
-            options={yearValues(2020, 2040)}
-            defaultValue={paymentData.expiryYear}
-            error={errors.expiryYear}
-            required
-          />
+            <SelectField
+              name="expiryYear"
+              control={control}
+              label="Year"
+              options={yearValues(2020, 2040)}
+              defaultValue={paymentData.expiryYear}
+              error={errors.expiryYear}
+              required
+            />
+          </DateInputsContainer>
         </DateContainer>
-
-        <ColumnContainer>
-          <SelectField
-            name="paymentType"
-            control={control}
-            label="Payment Type"
-            options={[
-              { name: "Master Card", value: "mastercard" },
-              { name: "Visa Card", value: "vistacard" },
-            ]}
-            defaultValue={paymentData.paymentType || "mastercard"}
-            error={errors.paymentType}
-            required
-          />
-        </ColumnContainer>
+      </InputContainer>
+      <InputContainer>
+        <SelectField
+          name="paymentType"
+          control={control}
+          label="Payment Type"
+          options={[
+            { name: "Master Card", value: "mastercard" },
+            { name: "Visa Card", value: "vistacard" },
+          ]}
+          defaultValue={paymentData.paymentType || "mastercard"}
+          error={errors.paymentType}
+          required
+        />
       </InputContainer>
 
       <InputContainer>
-        <ColumnContainer>
+        <ColumnContainer style={{ flex: 2 / 3 }}>
           <TextField
             {...register("cardNumber", {
               value: paymentData.cardNumber || undefined,
@@ -128,7 +134,7 @@ const PaymentForm = ({ paymentData, setPaymentData, ...props }) => {
             required
           />
         </ColumnContainer>
-        <ColumnContainer>
+        <ColumnContainer style={{ flex: 1 / 3 }}>
           <TextField
             {...register("cvc", {
               value: paymentData.cvc || undefined,

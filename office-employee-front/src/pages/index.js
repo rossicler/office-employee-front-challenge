@@ -22,7 +22,7 @@ export default function Home() {
   const dispatch = useDispatch();
 
   const changeStepHandler = (newStep) => {
-    // Verify validity before changing step
+    //TODO Verify validity before changing step
     setStep(newStep);
   };
 
