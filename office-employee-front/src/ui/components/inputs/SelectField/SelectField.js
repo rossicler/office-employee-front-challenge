@@ -4,11 +4,20 @@ import { Controller } from "react-hook-form";
 
 import TextField from "../TextField/TextField";
 
-const SelectField = ({ name, control, label, options, defaultValue }) => {
+const SelectField = ({
+  name,
+  control,
+  label,
+  options,
+  defaultValue,
+  required,
+  error,
+}) => {
   return (
     <Controller
       name={name}
       control={control}
+      rules={{ required: required }}
       render={({ field: { onChange, value, ref } }) => (
         <TextField
           value={value || defaultValue || ""}
@@ -17,6 +26,7 @@ const SelectField = ({ name, control, label, options, defaultValue }) => {
           label={label}
           variant="outlined"
           select
+          error={error ? error : false}
         >
           {options.map((item) => (
             <MenuItem key={item.value} value={item.value}>

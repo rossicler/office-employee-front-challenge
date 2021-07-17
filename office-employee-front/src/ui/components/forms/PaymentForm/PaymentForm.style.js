@@ -1,6 +1,6 @@
 import { styled } from "@material-ui/core/styles";
 
-export const BirthDateContainer = styled("div")(({ theme }) => ({
+export const DateContainer = styled("div")(({ theme }) => ({
   flex: 1,
   display: "flex",
   minWidth: 280,

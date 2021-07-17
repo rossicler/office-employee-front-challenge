@@ -12,7 +12,7 @@ const Step = (props) => {
       style={{
         backgroundColor: props.stepActive
           ? theme.palette.primary.main
-          : theme.palette.grey[400],
+          : theme.palette.secondary.main,
       }}
     >
       <StepButton href="#" onClick={props.onClick}>

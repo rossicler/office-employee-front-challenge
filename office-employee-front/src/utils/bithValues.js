@@ -23,9 +23,9 @@ export const monthValues = () => [
   { name: "Dec", value: 12 },
 ];
 
-export const yearValues = () => {
+export const yearValues = (from = 1901, to = 2021) => {
   const values = [];
-  generateArray(1901, 2021, "desc").forEach((year) =>
+  generateArray(from, to, "desc").forEach((year) =>
     values.push({ name: `${year}`, value: year })
   );
   return values;

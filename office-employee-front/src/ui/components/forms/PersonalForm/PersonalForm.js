@@ -2,8 +2,6 @@ import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 
 import {
-  Form,
-  InputContainer,
   ColumnContainer,
   BirthDateContainer,
   ButtonsContainer,
@@ -11,6 +9,8 @@ import {
 import TextField from "../../inputs/TextField/TextField";
 import SelectField from "../../inputs/SelectField/SelectField";
 import Button from "../../Button/Button";
+import InputContainer from "../../inputs/InputContainer/InputContainer";
+import Form from "../Form/Form";
 import {
   dayValues,
   monthValues,
@@ -18,25 +18,22 @@ import {
 } from "../../../../utils/bithValues";
 
 const PersonalForm = ({ personalData, setPersonalData, ...props }) => {
-  const {
-    register,
-    handleSubmit,
-    control,
-    formState: { errors },
-  } = useForm({ mode: "onBlur" });
+  const { register, handleSubmit, control, formState } = useForm();
+  const { isValid, errors } = formState;
 
   const onSubmit = (data) => {
-    console.log(data);
     setPersonalData(data);
     props.changeStepHandler(2);
   };
 
+  const onError = (errors) => console.log(errors);
+
   useEffect(() => {
-    console.log(errors);
-  }, [errors]);
+    console.log(isValid);
+  }, [isValid]);
 
   return (
-    <Form onSubmit={handleSubmit(onSubmit)}>
+    <Form>
       <InputContainer>
         <TextField
           {...register("firstName", {
@@ -46,6 +43,7 @@ const PersonalForm = ({ personalData, setPersonalData, ...props }) => {
           label="First name"
           variant="outlined"
           defaultValue={personalData.firstName}
+          error={errors.firstName}
           required
         />
       </InputContainer>
@@ -59,6 +57,7 @@ const PersonalForm = ({ personalData, setPersonalData, ...props }) => {
           label="Last name"
           variant="outlined"
           defaultValue={personalData.lastName}
+          error={errors.lastName}
           required
         />
       </InputContainer>
@@ -71,6 +70,8 @@ const PersonalForm = ({ personalData, setPersonalData, ...props }) => {
             label="Day"
             options={dayValues()}
             defaultValue={personalData.birthDay}
+            error={errors.birthDay}
+            required
           />
 
           <SelectField
@@ -79,6 +80,8 @@ const PersonalForm = ({ personalData, setPersonalData, ...props }) => {
             label="Month"
             options={monthValues()}
             defaultValue={personalData.birthMonth}
+            error={errors.birthMonth}
+            required
           />
 
           <SelectField
@@ -87,6 +90,8 @@ const PersonalForm = ({ personalData, setPersonalData, ...props }) => {
             label="Year"
             options={yearValues()}
             defaultValue={personalData.birthYear}
+            error={errors.birthYear}
+            required
           />
         </BirthDateContainer>
 
@@ -100,6 +105,8 @@ const PersonalForm = ({ personalData, setPersonalData, ...props }) => {
               { name: "Female", value: "F" },
             ]}
             defaultValue={personalData.gender || "M"}
+            error={errors.gender}
+            required
           />
         </ColumnContainer>
       </InputContainer>
@@ -113,6 +120,7 @@ const PersonalForm = ({ personalData, setPersonalData, ...props }) => {
           label="Username"
           variant="outlined"
           defaultValue={personalData.username}
+          error={errors.username}
           required
         />
       </InputContainer>
@@ -127,12 +135,17 @@ const PersonalForm = ({ personalData, setPersonalData, ...props }) => {
           variant="outlined"
           type="password"
           defaultValue={personalData.password}
+          error={errors.password}
           required
         />
       </InputContainer>
 
       <ButtonsContainer>
-        <Button color="primary" variant="contained" type="submit">
+        <Button
+          color="primary"
+          variant="contained"
+          onClick={() => handleSubmit(onSubmit, onError)()}
+        >
           Next
         </Button>
       </ButtonsContainer>

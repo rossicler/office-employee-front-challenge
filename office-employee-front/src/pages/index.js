@@ -6,10 +6,16 @@ import Stepper from "../ui/components/Stepper/Stepper";
 import Step from "../ui/components/Step/Step";
 import StepInformation from "../ui/components/StepInformation/StepInformation";
 import PersonalForm from "../ui/components/forms/PersonalForm/PersonalForm";
+import ContactForm from "../ui/components/forms/ContactForm/ContactForm";
+import OfficialForm from "../ui/components/forms/OfficialForm/OfficialForm";
+import PaymentForm from "../ui/components/forms/PaymentForm/PaymentForm";
 
 export default function Home() {
   const [step, setStep] = useState(1);
   const [personalData, setPersonalData] = useState({});
+  const [contactData, setContactData] = useState({});
+  const [officialData, setOfficialData] = useState({});
+  const [paymentData, setPaymentData] = useState({});
 
   const changeStepHandler = (newStep) => {
     // Verify validity before changing step
@@ -52,6 +58,27 @@ export default function Home() {
             changeStepHandler={changeStepHandler}
             personalData={personalData}
             setPersonalData={setPersonalData}
+          />
+        )}
+        {step === 2 && (
+          <ContactForm
+            changeStepHandler={changeStepHandler}
+            contactData={contactData}
+            setContactData={setContactData}
+          />
+        )}
+        {step === 3 && (
+          <OfficialForm
+            changeStepHandler={changeStepHandler}
+            officialData={officialData}
+            setOfficialData={setOfficialData}
+          />
+        )}
+        {step === 4 && (
+          <PaymentForm
+            changeStepHandler={changeStepHandler}
+            paymentData={paymentData}
+            setPaymentData={setPaymentData}
           />
         )}
       </FormContainer>
