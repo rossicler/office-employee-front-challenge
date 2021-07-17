@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 
 import { FormContainer } from "../ui/styles/pages/index.style";
 import Card from "../ui/components/Card/Card";
@@ -9,6 +10,7 @@ import PersonalForm from "../ui/components/forms/PersonalForm/PersonalForm";
 import ContactForm from "../ui/components/forms/ContactForm/ContactForm";
 import OfficialForm from "../ui/components/forms/OfficialForm/OfficialForm";
 import PaymentForm from "../ui/components/forms/PaymentForm/PaymentForm";
+import * as employeeActions from "../store/employee-actions";
 
 export default function Home() {
   const [step, setStep] = useState(1);
@@ -17,9 +19,21 @@ export default function Home() {
   const [officialData, setOfficialData] = useState({});
   const [paymentData, setPaymentData] = useState({});
 
+  const dispatch = useDispatch();
+
   const changeStepHandler = (newStep) => {
     // Verify validity before changing step
     setStep(newStep);
+  };
+
+  const submitHandler = () => {
+    const employeeInfo = {
+      personalInfo: personalData,
+      contactInfo: contactData,
+      officialInfo: officialData,
+      paymentInfo: paymentData,
+    };
+    dispatch(employeeActions.addEmployee(employeeInfo));
   };
 
   return (
@@ -79,6 +93,7 @@ export default function Home() {
             changeStepHandler={changeStepHandler}
             paymentData={paymentData}
             setPaymentData={setPaymentData}
+            submitHandler={submitHandler}
           />
         )}
       </FormContainer>

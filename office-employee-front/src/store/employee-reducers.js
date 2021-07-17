@@ -15,6 +15,7 @@ const employeeReducer = (state = initialState, action) => {
     default:
       break;
   }
+  console.log(state);
   return state;
 };
 

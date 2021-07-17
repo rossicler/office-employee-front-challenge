@@ -31,7 +31,7 @@ const PaymentForm = ({ paymentData, setPaymentData, ...props }) => {
 
   const onSubmit = (data) => {
     setPaymentData(data);
-    // submit all
+    props.submitHandler();
     alert("Submited");
   };
 

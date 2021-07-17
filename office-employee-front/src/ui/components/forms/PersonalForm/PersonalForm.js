@@ -37,7 +37,7 @@ const PersonalForm = ({ personalData, setPersonalData, ...props }) => {
       <InputContainer>
         <TextField
           {...register("firstName", {
-            value: personalData.firstName || undefined,
+            value: personalData.firstName ? personalData.firstName : undefined,
             required: true,
           })}
           label="First name"
@@ -51,7 +51,7 @@ const PersonalForm = ({ personalData, setPersonalData, ...props }) => {
       <InputContainer>
         <TextField
           {...register("lastName", {
-            value: personalData.lastName || undefined,
+            value: personalData.lastName ? personalData.lastName : undefined,
             required: true,
           })}
           label="Last name"
@@ -114,7 +114,7 @@ const PersonalForm = ({ personalData, setPersonalData, ...props }) => {
       <InputContainer>
         <TextField
           {...register("username", {
-            value: personalData.username || undefined,
+            value: personalData.username ? personalData.username : undefined,
             required: true,
           })}
           label="Username"
@@ -128,7 +128,7 @@ const PersonalForm = ({ personalData, setPersonalData, ...props }) => {
       <InputContainer>
         <TextField
           {...register("password", {
-            value: personalData.password || undefined,
+            value: personalData.password ? personalData.password : undefined,
             required: true,
           })}
           label="Password"
