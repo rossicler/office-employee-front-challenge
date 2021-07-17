@@ -9,6 +9,7 @@ import PersonalForm from "../ui/components/forms/PersonalForm/PersonalForm";
 
 export default function Home() {
   const [step, setStep] = useState(1);
+  const [personalData, setPersonalData] = useState({});
 
   const changeStepHandler = (newStep) => {
     // Verify validity before changing step
@@ -46,7 +47,13 @@ export default function Home() {
 
       <FormContainer>
         <StepInformation currentStep={step} maxStep={4}></StepInformation>
-        {step === 1 && <PersonalForm changeStepHandler={changeStepHandler} />}
+        {step === 1 && (
+          <PersonalForm
+            changeStepHandler={changeStepHandler}
+            personalData={personalData}
+            setPersonalData={setPersonalData}
+          />
+        )}
       </FormContainer>
     </Card>
   );

@@ -1,6 +1,5 @@
-import React from "react";
-import { MenuItem } from "@material-ui/core";
-import { useForm, Controller } from "react-hook-form";
+import React, { useEffect } from "react";
+import { useForm } from "react-hook-form";
 
 import {
   Form,
@@ -18,35 +17,48 @@ import {
   yearValues,
 } from "../../../../utils/bithValues";
 
-const PersonalForm = (props) => {
+const PersonalForm = ({ personalData, setPersonalData, ...props }) => {
   const {
     register,
     handleSubmit,
     control,
     formState: { errors },
-  } = useForm();
+  } = useForm({ mode: "onBlur" });
 
   const onSubmit = (data) => {
     console.log(data);
+    setPersonalData(data);
     props.changeStepHandler(2);
   };
+
+  useEffect(() => {
+    console.log(errors);
+  }, [errors]);
 
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
       <InputContainer>
         <TextField
-          {...register("firstName", { required: true })}
+          {...register("firstName", {
+            value: personalData.firstName || undefined,
+            required: true,
+          })}
           label="First name"
           variant="outlined"
+          defaultValue={personalData.firstName}
           required
         />
       </InputContainer>
 
       <InputContainer>
         <TextField
-          {...register("lastName", { required: true })}
+          {...register("lastName", {
+            value: personalData.lastName || undefined,
+            required: true,
+          })}
           label="Last name"
           variant="outlined"
+          defaultValue={personalData.lastName}
           required
         />
       </InputContainer>
@@ -58,6 +70,7 @@ const PersonalForm = (props) => {
             control={control}
             label="Day"
             options={dayValues()}
+            defaultValue={personalData.birthDay}
           />
 
           <SelectField
@@ -65,6 +78,7 @@ const PersonalForm = (props) => {
             control={control}
             label="Month"
             options={monthValues()}
+            defaultValue={personalData.birthMonth}
           />
 
           <SelectField
@@ -72,6 +86,7 @@ const PersonalForm = (props) => {
             control={control}
             label="Year"
             options={yearValues()}
+            defaultValue={personalData.birthYear}
           />
         </BirthDateContainer>
 
@@ -84,26 +99,34 @@ const PersonalForm = (props) => {
               { name: "Male", value: "M" },
               { name: "Female", value: "F" },
             ]}
-            defaultValue="M"
+            defaultValue={personalData.gender || "M"}
           />
         </ColumnContainer>
       </InputContainer>
 
       <InputContainer>
         <TextField
-          {...register("username", { required: true })}
+          {...register("username", {
+            value: personalData.username || undefined,
+            required: true,
+          })}
           label="Username"
           variant="outlined"
+          defaultValue={personalData.username}
           required
         />
       </InputContainer>
 
       <InputContainer>
         <TextField
-          {...register("password", { required: true })}
+          {...register("password", {
+            value: personalData.password || undefined,
+            required: true,
+          })}
           label="Password"
           variant="outlined"
           type="password"
+          defaultValue={personalData.password}
           required
         />
       </InputContainer>
