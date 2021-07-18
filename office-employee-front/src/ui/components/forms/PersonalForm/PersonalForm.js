@@ -30,10 +30,6 @@ const PersonalForm = ({ personalData, setPersonalData, ...props }) => {
 
   const onError = (errors) => console.log(errors);
 
-  useEffect(() => {
-    console.log(isValid);
-  }, [isValid]);
-
   return (
     <Form>
       <InputContainer>

@@ -19,7 +19,6 @@ const OfficialForm = ({ officialData, setOfficialData, ...props }) => {
   };
 
   const onSubmit = (data) => {
-    console.log(data);
     setOfficialData(data);
     props.changeStepHandler(4);
   };

@@ -34,7 +34,6 @@ const PaymentForm = ({ paymentData, setPaymentData, ...props }) => {
   const onSubmit = (data) => {
     setPaymentData(data);
     props.submitHandler();
-    alert("Submited");
   };
 
   return (
