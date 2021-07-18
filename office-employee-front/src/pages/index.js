@@ -67,11 +67,7 @@ export default function Home() {
         openSnackbarHandler(true, "Employee added with success!");
       })
       .catch((err) => {
-        console.log(err);
-        openSnackbarHandler(
-          false,
-          "Error, username or email is already in use!"
-        );
+        openSnackbarHandler(false, err.response.data.error);
       });
   };
 
@@ -80,7 +76,7 @@ export default function Home() {
       <Card title="SIGN UP OFFICE EMPLOYEE ACCOUNT">
         <Snackbar
           open={showSnackbar}
-          autoHideDuration={5000}
+          autoHideDuration={3000}
           onClose={closeSnackbarHandler}
         >
           <Alert
