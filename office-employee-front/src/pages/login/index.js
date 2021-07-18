@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Snackbar } from "@material-ui/core";
 import { useForm } from "react-hook-form";
+import { useRouter } from "next/router";
 
 import { FormContainer } from "../../ui/styles/pages/login/index.style";
 import Card from "../../ui/components/Card/Card";
@@ -16,11 +17,19 @@ export default function Login() {
   const { register, handleSubmit, formState } = useForm();
   const { isValid, errors } = formState;
 
+  const router = useRouter();
   const dispatch = useDispatch();
 
   const loginHandler = (data) => {
-    console.log(data);
-    openSnackbarHandler(true, "Logado com sucesso!");
+    const { username, password } = data;
+    dispatch(employeeActions.loginEmployee(username, password))
+      .then(() => {
+        openSnackbarHandler(true, "Logado com sucesso!");
+        router.push("/profile");
+      })
+      .catch((err) => {
+        openSnackbarHandler(false, err.response.data.error);
+      });
   };
 
   const loginErrorHandler = (errs) => {
