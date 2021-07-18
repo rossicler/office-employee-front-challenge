@@ -13,13 +13,13 @@ export const CardContainer = styled("div")(({ theme }) => ({
 }));
 
 export const CardHeader = styled("div")(({ theme }) => ({
-  margin: "20px 0px",
+  margin: `${theme.spacing(3)}px 0px`,
   display: "flex",
   justifyContent: "center",
 }));
 
 export const CardContent = styled("div")(({ theme }) => ({
-  margin: "20px 0px",
+  margin: `${theme.spacing(3)}px 0px`,
   display: "flex",
   flexDirection: "column",
   alignItems: "center",
