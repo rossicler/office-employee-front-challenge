@@ -10,7 +10,7 @@ const LoginForm = (props) => {
   const { register, handleSubmit, errors } = props;
 
   return (
-    <>
+    <form onSubmit={handleSubmit} noValidate>
       <InputContainer>
         <TextField
           {...register("username", {
@@ -39,11 +39,12 @@ const LoginForm = (props) => {
       <ButtonStyled
         color="primary"
         variant="contained"
-        onClick={() => handleSubmit()}
+        // onClick={() => handleSubmit()}
+        type="submit"
       >
         <Typography variant="body1">Login</Typography>
       </ButtonStyled>
-    </>
+    </form>
   );
 };
 

@@ -111,7 +111,7 @@ const PaymentForm = ({ paymentData, setPaymentData, ...props }) => {
           label="Payment Type"
           options={[
             { name: "Master Card", value: "mastercard" },
-            { name: "Visa Card", value: "vistacard" },
+            { name: "Visa Card", value: "visacard" },
           ]}
           defaultValue={paymentData.paymentType || "mastercard"}
           error={errors.paymentType}

@@ -1,11 +1,12 @@
 import {
   ADD_EMPLOYEE,
+  GET_LOGGED_EMPLOYEE,
   LOGIN_EMPLOYEE,
   LOGOUT_EMPLOYEE,
 } from "./employee-actions";
 
 const initialState = {
-  employees: [],
+  currentEmployee: {},
   employeeToken: "",
 };
 
@@ -14,7 +15,13 @@ const employeeReducer = (state = initialState, action) => {
     case ADD_EMPLOYEE:
       state = {
         ...state,
-        employees: state.employees.concat(action.employee),
+        currentEmployee: action.employee,
+      };
+      break;
+    case GET_LOGGED_EMPLOYEE:
+      state = {
+        ...state,
+        currentEmployee: action.employee,
       };
       break;
     case LOGIN_EMPLOYEE:

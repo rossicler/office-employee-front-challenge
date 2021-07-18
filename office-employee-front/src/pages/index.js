@@ -10,7 +10,7 @@ import Step from "../ui/components/Step/Step";
 import StepInformation from "../ui/components/StepInformation/StepInformation";
 import PersonalForm from "../ui/components/forms/PersonalForm/PersonalForm";
 import ContactForm from "../ui/components/forms/ContactForm/ContactForm";
-import OfficialForm from "../ui/components/forms/OfficialForm/OfficialForm";
+import OfficeForm from "../ui/components/forms/OfficeForm/OfficeForm";
 import PaymentForm from "../ui/components/forms/PaymentForm/PaymentForm";
 import Alert from "../ui/components/Alert/Alert";
 import * as employeeActions from "../store/employee-actions";
@@ -21,7 +21,7 @@ export default function Home() {
   const [alertInfo, setAlertInfo] = useState({});
   const [personalData, setPersonalData] = useState({});
   const [contactData, setContactData] = useState({});
-  const [officialData, setOfficialData] = useState({});
+  const [officeData, setOfficeData] = useState({});
   const [paymentData, setPaymentData] = useState({});
 
   const dispatch = useDispatch();
@@ -57,7 +57,7 @@ export default function Home() {
     const employeeInfo = {
       ...personalData,
       ...contactData,
-      ...officialData,
+      ...officeData,
       ...paymentData,
       birthDate: moment(birthDate).format("YYYY-MM-DD"),
       expiryDate: moment(expiryDate).format("YYYY-MM-DD"),
@@ -101,7 +101,7 @@ export default function Home() {
           />
           <Step
             iconName="ti-star"
-            title="Official"
+            title="Office"
             stepActive={step === 3}
             onClick={() => changeStepHandler(3)}
           />
@@ -130,10 +130,10 @@ export default function Home() {
             />
           )}
           {step === 3 && (
-            <OfficialForm
+            <OfficeForm
               changeStepHandler={changeStepHandler}
-              officialData={officialData}
-              setOfficialData={setOfficialData}
+              officeData={officeData}
+              setOfficeData={setOfficeData}
             />
           )}
           {step === 4 && (

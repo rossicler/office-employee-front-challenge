@@ -1,13 +1,13 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 
-import { ButtonsContainer } from "./OfficialForm.style";
+import { ButtonsContainer } from "./OfficeForm.style";
 import TextField from "../../inputs/TextField/TextField";
 import Button from "../../Button/Button";
 import InputContainer from "../../inputs/InputContainer/InputContainer";
 import Form from "../Form/Form";
 
-const OfficialForm = ({ officialData, setOfficialData, ...props }) => {
+const OfficeForm = ({ officeData, setOfficeData, ...props }) => {
   const {
     register,
     handleSubmit,
@@ -19,7 +19,7 @@ const OfficialForm = ({ officialData, setOfficialData, ...props }) => {
   };
 
   const onSubmit = (data) => {
-    setOfficialData(data);
+    setOfficeData(data);
     props.changeStepHandler(4);
   };
 
@@ -28,12 +28,12 @@ const OfficialForm = ({ officialData, setOfficialData, ...props }) => {
       <InputContainer>
         <TextField
           {...register("employeeId", {
-            value: officialData.employeeId || undefined,
+            value: officeData.employeeId || undefined,
             required: true,
           })}
           label="Employee ID"
           variant="outlined"
-          defaultValue={officialData.employeeId}
+          defaultValue={officeData.employeeId}
           error={errors.employeeId}
           required
         />
@@ -42,12 +42,12 @@ const OfficialForm = ({ officialData, setOfficialData, ...props }) => {
       <InputContainer>
         <TextField
           {...register("designation", {
-            value: officialData.designation || undefined,
+            value: officeData.designation || undefined,
             required: true,
           })}
           label="Designation"
           variant="outlined"
-          defaultValue={officialData.designation}
+          defaultValue={officeData.designation}
           error={errors.designation}
           required
         />
@@ -56,12 +56,12 @@ const OfficialForm = ({ officialData, setOfficialData, ...props }) => {
       <InputContainer>
         <TextField
           {...register("department", {
-            value: officialData.department || undefined,
+            value: officeData.department || undefined,
             required: true,
           })}
           label="Department"
           variant="outlined"
-          defaultValue={officialData.department}
+          defaultValue={officeData.department}
           error={errors.department}
           required
         />
@@ -70,12 +70,12 @@ const OfficialForm = ({ officialData, setOfficialData, ...props }) => {
       <InputContainer>
         <TextField
           {...register("workingHours", {
-            value: officialData.workingHours || undefined,
+            value: officeData.workingHours || undefined,
             required: true,
           })}
           label="Working hours"
           variant="outlined"
-          defaultValue={officialData.workingHours}
+          defaultValue={officeData.workingHours}
           error={errors.workingHours}
           required
         />
@@ -97,4 +97,4 @@ const OfficialForm = ({ officialData, setOfficialData, ...props }) => {
   );
 };
 
-export default OfficialForm;
+export default OfficeForm;

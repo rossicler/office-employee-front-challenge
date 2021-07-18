@@ -20,7 +20,7 @@ const Header = () => {
     <AppBarStyled position="static">
       <Toolbar>
         <TypographyStyled variant="h6" color="textPrimary">
-          Official Employee
+          Office Employee
         </TypographyStyled>
         {!token ? (
           <ButtonStyled onClick={() => router.push("/login")}>

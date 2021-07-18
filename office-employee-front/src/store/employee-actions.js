@@ -1,15 +1,28 @@
-import { createEmployee, login } from "../services/api";
+import { createEmployee, getEmployee, login } from "../services/api";
 
 export const ADD_EMPLOYEE = "ADD_EMPLOYEE";
+export const GET_LOGGED_EMPLOYEE = "GET_LOGGED_EMPLOYEE";
 export const LOGIN_EMPLOYEE = "LOGIN_EMPLOYEE";
 export const LOGOUT_EMPLOYEE = "LOGOUT_EMPLOYEE";
 
 export const addEmployee = (employeeData) => {
   return async (dispatch) => {
     try {
-      const employee = await createEmployee(employeeData);
-      dispatch({ type: ADD_EMPLOYEE, employee });
+      const { data } = await createEmployee(employeeData);
+      dispatch({ type: ADD_EMPLOYEE, employee: data });
       return Promise.resolve();
+    } catch (err) {
+      return Promise.reject(err);
+    }
+  };
+};
+
+export const getLoggedEmployee = () => {
+  return async (dispatch, getState) => {
+    try {
+      const token = getState().employees.employeeToken;
+      const { data } = await getEmployee(token);
+      dispatch({ type: GET_LOGGED_EMPLOYEE, employee: data });
     } catch (err) {
       return Promise.reject(err);
     }
