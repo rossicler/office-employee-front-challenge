@@ -66,7 +66,7 @@ const PersonalForm = ({ personalData, setPersonalData, ...props }) => {
 
       <InputContainer>
         <DateContainer>
-          <Typography variant="body2" color="textSecondary" paragraph={true}>
+          <Typography variant="body2" color="textPrimary" paragraph={true}>
             Birth Date *
           </Typography>
           <DateInputsContainer>

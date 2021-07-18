@@ -7,6 +7,7 @@ import ReduxThunk from "redux-thunk";
 
 import theme from "../ui/themes/theme";
 import employeesReducer from "../store/employee-reducers";
+import Header from "../ui/components/Header/Header";
 
 const rootReducer = combineReducers({
   employees: employeesReducer,
@@ -30,6 +31,7 @@ function MyApp({ Component, pageProps }) {
       </Head>
       <Provider store={store}>
         <ThemeProvider theme={theme}>
+          <Header />
           <Component {...pageProps} />
         </ThemeProvider>
       </Provider>
