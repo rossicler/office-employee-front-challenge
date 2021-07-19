@@ -24,16 +24,12 @@ export default function Login() {
     const { username, password } = data;
     dispatch(employeeActions.loginEmployee(username, password))
       .then(() => {
-        openSnackbarHandler(true, "Logado com sucesso!");
+        openSnackbarHandler(true, "Logged with success!");
         router.push("/profile");
       })
       .catch((err) => {
         openSnackbarHandler(false, err.response.data.error);
       });
-  };
-
-  const loginErrorHandler = (errs) => {
-    openSnackbarHandler(false, "Preencha todos os campos corretamente");
   };
 
   const openSnackbarHandler = (isSuccess, message) => {
@@ -75,7 +71,7 @@ export default function Login() {
       <FormContainer>
         <LoginForm
           register={register}
-          handleSubmit={handleSubmit(loginHandler, loginErrorHandler)}
+          handleSubmit={handleSubmit(loginHandler)}
           errors={errors}
         />
       </FormContainer>
