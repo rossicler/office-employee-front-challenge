@@ -51,7 +51,6 @@ export const getLoggedEmployeeGraphQL = () => {
     try {
       const token = getState().employees.employeeToken;
       const { data } = await getEmployeeGraphQL(token);
-      console.log(data);
       dispatch({ type: GET_LOGGED_EMPLOYEE, employee: data.employee });
     } catch (err) {
       return Promise.reject(err);

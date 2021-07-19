@@ -96,7 +96,6 @@ export default function Home() {
 
   const nextHandler = async () => {
     const isStepValid = await trigger();
-    console.log(errors);
     if (isStepValid) setStep((curStep) => curStep + 1);
   };
 
