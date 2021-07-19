@@ -6,30 +6,7 @@ import {
 } from "./employee-actions";
 
 const initialState = {
-  currentEmployee: {
-    id: "",
-    firstName: "",
-    lastName: "",
-    birthDate: "",
-    gender: "",
-    username: "",
-    email: "",
-    phone: "",
-    address: "",
-    country: "",
-    employeeId: "",
-    designation: "",
-    department: "",
-    workingHours: "",
-    bankInfo: {
-      bankName: "",
-      holderName: "",
-      expiryDate: "",
-      paymentType: "",
-      cardNumber: "",
-      cvc: "",
-    },
-  },
+  currentEmployee: {},
   employeeToken: "",
   employeeId: "",
 };

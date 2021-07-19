@@ -119,12 +119,40 @@ export default function Home() {
     data.birthDate = moment(birthDate).format("YYYY-MM-DD");
     data.expiryDate = moment(expiryDate).format("YYYY-MM-DD");
 
-    dispatch(employeeActions.addEmployee(data))
+    // Only need to do this parsing with GraphQL
+    const parsedEmployee = {
+      firstName: data.firstName,
+      lastName: data.lastName,
+      birthDate: data.birthDate,
+      gender: data.gender,
+      username: data.username,
+      password: data.password,
+      email: data.email,
+      phone: data.phone,
+      address: data.address,
+      country: data.country,
+      employeeId: data.employeeId,
+      designation: data.designation,
+      department: data.department,
+      workingHours: parseInt(data.workingHours),
+      bankName: data.bankName,
+      holderName: data.holderName,
+      expiryDate: data.expiryDate,
+      paymentType: data.paymentType,
+      cardNumber: data.cardNumber.toString(),
+      cvc: data.cvc.toString(),
+    };
+
+    // Using REST API
+    // dispatch(employeeActions.addEmployee(data))
+    dispatch(employeeActions.addEmployeeGraphQL(parsedEmployee))
       .then(() => {
         openSnackbarHandler(true, "Employee added with success!");
       })
       .catch((err) => {
-        openSnackbarHandler(false, err.response.data.error);
+        // Using REST API
+        // openSnackbarHandler(false, err.response.data.error);
+        openSnackbarHandler(false, err.message);
       });
   };
 

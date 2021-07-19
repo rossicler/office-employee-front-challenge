@@ -22,6 +22,7 @@ export default function Login() {
 
   const loginHandler = (data) => {
     const { username, password } = data;
+    // Using REST API
     // dispatch(employeeActions.loginEmployee(username, password))
     dispatch(employeeActions.loginEmployeeGraphQL(username, password))
       .then(() => {
@@ -29,7 +30,9 @@ export default function Login() {
         router.push("/profile");
       })
       .catch((err) => {
-        openSnackbarHandler(false, err.response.data.error);
+        // Using REST API
+        // openSnackbarHandler(false, err.response.data.error);
+        openSnackbarHandler(false, err.message);
       });
   };
 

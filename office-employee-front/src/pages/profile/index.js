@@ -24,25 +24,23 @@ const Profile = () => {
   const loadEmployeeData = useCallback(() => {
     setLoading(true);
     setError(undefined);
+    // Using REST API
     // dispatch(employeeActions.getLoggedEmployee())
     dispatch(employeeActions.getLoggedEmployeeGraphQL())
       .then(() => {
         setLoading(false);
       })
       .catch((err) => {
-        console.log(err);
         setLoading(false);
-        setError("Problem fetching employee data!");
+        // Using REST API
+        // setError(false, err.response.data.error);
+        setError(false, err.message);
       });
   }, [dispatch]);
 
   useEffect(() => {
     loadEmployeeData();
   }, [loadEmployeeData]);
-
-  useEffect(() => {
-    console.log(currentEmployee);
-  }, [currentEmployee]);
 
   if (error) {
     return (
@@ -109,27 +107,46 @@ const Profile = () => {
         <InfoSection>
           <InfoField
             label="Bank Name"
-            text={currentEmployee.bankInfo.bankName}
+            text={
+              currentEmployee.bankInfo ? currentEmployee.bankInfo.bankName : ""
+            }
           />
           <InfoField
             label="Holder Name"
-            text={currentEmployee.bankInfo.holderName}
+            text={
+              currentEmployee.bankInfo
+                ? currentEmployee.bankInfo.holderName
+                : ""
+            }
           />
           <InfoField
             label="Expiry Date"
-            text={currentEmployee.bankInfo.expiryDate}
+            text={
+              currentEmployee.bankInfo
+                ? currentEmployee.bankInfo.expiryDate
+                : ""
+            }
           />
           <InfoField
             label="Payment Type"
             text={typeToText.paymentTypeToString(
-              currentEmployee.bankInfo.paymentType
+              currentEmployee.bankInfo
+                ? currentEmployee.bankInfo.paymentType
+                : ""
             )}
           />
           <InfoField
             label="Card Number"
-            text={currentEmployee.bankInfo.cardNumber}
+            text={
+              currentEmployee.bankInfo
+                ? currentEmployee.bankInfo.cardNumber
+                : ""
+            }
           />
-          <InfoField label="CVC" text={currentEmployee.bankInfo.cvc} />
+          <InfoField
+            label="CVC"
+            text={currentEmployee.bankInfo ? currentEmployee.bankInfo.cvc : ""}
+          />
         </InfoSection>
       </InfoContainer>
     </Card>

@@ -3,6 +3,7 @@ export const paymentTypeToString = (paymentType) => {
     mastercard: "Master Card",
     visacard: "Visa Card",
   };
+  if (!typeObj.hasOwnProperty(paymentType)) return "";
   return typeObj[paymentType];
 };
 
@@ -12,6 +13,7 @@ export const countryToString = (country) => {
     australia: "Australia",
     america: "America",
   };
+  if (!typeObj.hasOwnProperty(country)) return "";
   return typeObj[country];
 };
 
@@ -20,5 +22,6 @@ export const genderToString = (genderType) => {
     M: "Male",
     F: "Female",
   };
+  if (!typeObj.hasOwnProperty(genderType)) return "";
   return typeObj[genderType];
 };
