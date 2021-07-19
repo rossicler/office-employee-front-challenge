@@ -1,4 +1,5 @@
 import { createEmployee, getEmployee, login } from "../services/api";
+import { loginGraphQL, getEmployeeGraphQL } from "../services/graphql/api";
 
 export const ADD_EMPLOYEE = "ADD_EMPLOYEE";
 export const GET_LOGGED_EMPLOYEE = "GET_LOGGED_EMPLOYEE";
@@ -29,11 +30,39 @@ export const getLoggedEmployee = () => {
   };
 };
 
+export const getLoggedEmployeeGraphQL = () => {
+  return async (dispatch, getState) => {
+    try {
+      const token = getState().employees.employeeToken;
+      const { data } = await getEmployeeGraphQL(token);
+      dispatch({ type: GET_LOGGED_EMPLOYEE, employee: data.employee });
+    } catch (err) {
+      return Promise.reject(err);
+    }
+  };
+};
+
 export const loginEmployee = (username, password) => {
   return async (dispatch) => {
     try {
       const { data } = await login(username, password);
       dispatch({ type: LOGIN_EMPLOYEE, token: data });
+      return Promise.resolve();
+    } catch (err) {
+      return Promise.reject(err);
+    }
+  };
+};
+
+export const loginEmployeeGraphQL = (username, password) => {
+  return async (dispatch) => {
+    try {
+      const { data } = await loginGraphQL(username, password);
+      dispatch({
+        type: LOGIN_EMPLOYEE,
+        token: data.login.token,
+        id: data.login.employee.id,
+      });
       return Promise.resolve();
     } catch (err) {
       return Promise.reject(err);

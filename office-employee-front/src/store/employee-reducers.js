@@ -6,8 +6,32 @@ import {
 } from "./employee-actions";
 
 const initialState = {
-  currentEmployee: {},
+  currentEmployee: {
+    id: "",
+    firstName: "",
+    lastName: "",
+    birthDate: "",
+    gender: "",
+    username: "",
+    email: "",
+    phone: "",
+    address: "",
+    country: "",
+    employeeId: "",
+    designation: "",
+    department: "",
+    workingHours: "",
+    bankInfo: {
+      bankName: "",
+      holderName: "",
+      expiryDate: "",
+      paymentType: "",
+      cardNumber: "",
+      cvc: "",
+    },
+  },
   employeeToken: "",
+  employeeId: "",
 };
 
 const employeeReducer = (state = initialState, action) => {
@@ -28,6 +52,7 @@ const employeeReducer = (state = initialState, action) => {
       state = {
         ...state,
         employeeToken: action.token,
+        employeeId: action.id ? action.id : "",
       };
       break;
     case LOGOUT_EMPLOYEE:

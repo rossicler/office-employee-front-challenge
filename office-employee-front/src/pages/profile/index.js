@@ -24,19 +24,25 @@ const Profile = () => {
   const loadEmployeeData = useCallback(() => {
     setLoading(true);
     setError(undefined);
-    dispatch(employeeActions.getLoggedEmployee())
+    // dispatch(employeeActions.getLoggedEmployee())
+    dispatch(employeeActions.getLoggedEmployeeGraphQL())
       .then(() => {
         setLoading(false);
       })
       .catch((err) => {
+        console.log(err);
         setLoading(false);
-        setError(err.response.data.error);
+        setError("Problem fetching employee data!");
       });
   }, [dispatch]);
 
   useEffect(() => {
     loadEmployeeData();
   }, [loadEmployeeData]);
+
+  useEffect(() => {
+    console.log(currentEmployee);
+  }, [currentEmployee]);
 
   if (error) {
     return (
@@ -59,78 +65,73 @@ const Profile = () => {
 
   return (
     <Card title="My Employee Profile">
-      {currentEmployee && (
-        <InfoContainer>
-          <Typography variant="h6" paragraph={true}>
-            Personal Infomation
-          </Typography>
-          <InfoSection>
-            <InfoField label="First Name" text={currentEmployee.firstName} />
-            <InfoField label="Last Name" text={currentEmployee.lastName} />
-            <InfoField label="Date of Birth" text={currentEmployee.birthDate} />
-            <InfoField
-              label="Gender"
-              text={typeToText.genderToString(currentEmployee.gender)}
-            />
-            <InfoField label="Username" text={currentEmployee.username} />
-          </InfoSection>
+      <InfoContainer>
+        <Typography variant="h6" paragraph={true}>
+          Personal Infomation
+        </Typography>
+        <InfoSection>
+          <InfoField label="First Name" text={currentEmployee.firstName} />
+          <InfoField label="Last Name" text={currentEmployee.lastName} />
+          <InfoField label="Date of Birth" text={currentEmployee.birthDate} />
+          <InfoField
+            label="Gender"
+            text={typeToText.genderToString(currentEmployee.gender)}
+          />
+          <InfoField label="Username" text={currentEmployee.username} />
+        </InfoSection>
 
-          <Typography variant="h6" paragraph={true}>
-            Contact Infomation
-          </Typography>
-          <InfoSection>
-            <InfoField label="Email" text={currentEmployee.email} />
-            <InfoField label="Phone" text={currentEmployee.phone} />
-            <InfoField label="Address" text={currentEmployee.address} />
-            <InfoField
-              label="Country"
-              text={typeToText.countryToString(currentEmployee.country)}
-            />
-          </InfoSection>
+        <Typography variant="h6" paragraph={true}>
+          Contact Infomation
+        </Typography>
+        <InfoSection>
+          <InfoField label="Email" text={currentEmployee.email} />
+          <InfoField label="Phone" text={currentEmployee.phone} />
+          <InfoField label="Address" text={currentEmployee.address} />
+          <InfoField
+            label="Country"
+            text={typeToText.countryToString(currentEmployee.country)}
+          />
+        </InfoSection>
 
-          <Typography variant="h6" paragraph={true}>
-            Office Infomation
-          </Typography>
-          <InfoSection>
-            <InfoField label="Employee ID" text={currentEmployee.employeeId} />
-            <InfoField label="Designation" text={currentEmployee.designation} />
-            <InfoField label="Department" text={currentEmployee.department} />
-            <InfoField
-              label="workingHours"
-              text={currentEmployee.workingHours}
-            />
-          </InfoSection>
+        <Typography variant="h6" paragraph={true}>
+          Office Infomation
+        </Typography>
+        <InfoSection>
+          <InfoField label="Employee ID" text={currentEmployee.employeeId} />
+          <InfoField label="Designation" text={currentEmployee.designation} />
+          <InfoField label="Department" text={currentEmployee.department} />
+          <InfoField label="workingHours" text={currentEmployee.workingHours} />
+        </InfoSection>
 
-          <Typography variant="h6" paragraph={true}>
-            Payment Infomation
-          </Typography>
-          <InfoSection>
-            <InfoField
-              label="Bank Name"
-              text={currentEmployee.bankInfo.bankName}
-            />
-            <InfoField
-              label="Holder Name"
-              text={currentEmployee.bankInfo.holderName}
-            />
-            <InfoField
-              label="Expiry Date"
-              text={currentEmployee.bankInfo.expiryDate}
-            />
-            <InfoField
-              label="Payment Type"
-              text={typeToText.paymentTypeToString(
-                currentEmployee.bankInfo.paymentType
-              )}
-            />
-            <InfoField
-              label="Card Number"
-              text={currentEmployee.bankInfo.cardNumber}
-            />
-            <InfoField label="CVC" text={currentEmployee.bankInfo.cvc} />
-          </InfoSection>
-        </InfoContainer>
-      )}
+        <Typography variant="h6" paragraph={true}>
+          Payment Infomation
+        </Typography>
+        <InfoSection>
+          <InfoField
+            label="Bank Name"
+            text={currentEmployee.bankInfo.bankName}
+          />
+          <InfoField
+            label="Holder Name"
+            text={currentEmployee.bankInfo.holderName}
+          />
+          <InfoField
+            label="Expiry Date"
+            text={currentEmployee.bankInfo.expiryDate}
+          />
+          <InfoField
+            label="Payment Type"
+            text={typeToText.paymentTypeToString(
+              currentEmployee.bankInfo.paymentType
+            )}
+          />
+          <InfoField
+            label="Card Number"
+            text={currentEmployee.bankInfo.cardNumber}
+          />
+          <InfoField label="CVC" text={currentEmployee.bankInfo.cvc} />
+        </InfoSection>
+      </InfoContainer>
     </Card>
   );
 };

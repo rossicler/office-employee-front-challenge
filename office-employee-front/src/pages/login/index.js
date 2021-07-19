@@ -15,14 +15,15 @@ export default function Login() {
   const [alertInfo, setAlertInfo] = useState({});
 
   const { register, handleSubmit, formState } = useForm();
-  const { isValid, errors } = formState;
+  const { errors } = formState;
 
   const router = useRouter();
   const dispatch = useDispatch();
 
   const loginHandler = (data) => {
     const { username, password } = data;
-    dispatch(employeeActions.loginEmployee(username, password))
+    // dispatch(employeeActions.loginEmployee(username, password))
+    dispatch(employeeActions.loginEmployeeGraphQL(username, password))
       .then(() => {
         openSnackbarHandler(true, "Logged with success!");
         router.push("/profile");
