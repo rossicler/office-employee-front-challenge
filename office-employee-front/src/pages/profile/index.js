@@ -53,7 +53,7 @@ const Profile = () => {
     );
   }
 
-  if (loading) {
+  if (loading || Object.keys(currentEmployee).length === 0) {
     return (
       <Card>
         <CircularProgress color="primary" />
@@ -113,40 +113,23 @@ const Profile = () => {
           />
           <InfoField
             label="Holder Name"
-            text={
-              currentEmployee.bankInfo
-                ? currentEmployee.bankInfo.holderName
-                : ""
-            }
+            text={currentEmployee.bankInfo.holderName}
           />
           <InfoField
             label="Expiry Date"
-            text={
-              currentEmployee.bankInfo
-                ? currentEmployee.bankInfo.expiryDate
-                : ""
-            }
+            text={currentEmployee.bankInfo.expiryDate}
           />
           <InfoField
             label="Payment Type"
             text={typeToText.paymentTypeToString(
-              currentEmployee.bankInfo
-                ? currentEmployee.bankInfo.paymentType
-                : ""
+              currentEmployee.bankInfo.paymentType
             )}
           />
           <InfoField
             label="Card Number"
-            text={
-              currentEmployee.bankInfo
-                ? currentEmployee.bankInfo.cardNumber
-                : ""
-            }
+            text={currentEmployee.bankInfo.cardNumber}
           />
-          <InfoField
-            label="CVC"
-            text={currentEmployee.bankInfo ? currentEmployee.bankInfo.cvc : ""}
-          />
+          <InfoField label="CVC" text={currentEmployee.bankInfo.cvc} />
         </InfoSection>
       </InfoContainer>
     </Card>
