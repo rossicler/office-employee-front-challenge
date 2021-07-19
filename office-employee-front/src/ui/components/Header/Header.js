@@ -3,7 +3,12 @@ import { Toolbar } from "@material-ui/core";
 import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
 
-import { AppBarStyled, TypographyStyled, ButtonStyled } from "./Header.style";
+import {
+  AppBarStyled,
+  TypographyStyled,
+  LinkStyled,
+  ButtonStyled,
+} from "./Header.style";
 import * as employeeActions from "../../../store/employee-actions";
 
 const Header = () => {
@@ -19,9 +24,11 @@ const Header = () => {
   return (
     <AppBarStyled position="static">
       <Toolbar>
-        <TypographyStyled variant="h6" color="textPrimary">
-          Office Employee
-        </TypographyStyled>
+        <LinkStyled href="#" underline="none" onClick={() => router.push("/")}>
+          <TypographyStyled variant="h6" color="textPrimary">
+            Office Employee
+          </TypographyStyled>
+        </LinkStyled>
         {!token ? (
           <ButtonStyled onClick={() => router.push("/login")}>
             Login
