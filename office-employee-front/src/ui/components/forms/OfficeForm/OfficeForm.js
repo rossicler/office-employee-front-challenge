@@ -20,7 +20,7 @@ const OfficeForm = () => {
       </InputContainer>
 
       <InputContainer>
-        <TextField label="Working hours" name="workingHours" />
+        <TextField label="Working hours" name="workingHours" type="number" />
       </InputContainer>
     </Form>
   );

@@ -6,6 +6,7 @@ import {
   get,
 } from "react-hook-form";
 import { MenuItem } from "@material-ui/core";
+import InputMask from "react-input-mask";
 
 import { TextFieldStyled } from "./TextField.style";
 
@@ -61,6 +62,37 @@ export const TextFieldSelect = ({ options, ...props }) => {
             </MenuItem>
           ))}
         </TextFieldStyled>
+      )}
+    />
+  );
+};
+
+export const TextFieldMask = ({ mask, ...props }) => {
+  const { fieldState } = useController(props);
+  const { control, formState } = useFormContext();
+  const error = get(formState.errors, props.name);
+  const errorText = fieldState.invalid ? error.message : "";
+
+  return (
+    <Controller
+      name={props.name}
+      control={control}
+      render={({ field: { onChange, value, ref } }) => (
+        <InputMask mask={mask} value={value} onChange={onChange}>
+          {() => {
+            return (
+              <TextFieldStyled
+                {...props}
+                value={value}
+                onChange={onChange}
+                inputRef={ref}
+                label={props.label}
+                variant="outlined"
+                error={fieldState.invalid}
+              />
+            );
+          }}
+        </InputMask>
       )}
     />
   );

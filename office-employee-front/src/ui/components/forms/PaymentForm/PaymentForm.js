@@ -6,7 +6,11 @@ import {
   DateInputsContainer,
   DateContainer,
 } from "../Form/Form.style";
-import { TextField, TextFieldSelect } from "../../inputs/TextField/TextField";
+import {
+  TextField,
+  TextFieldSelect,
+  TextFieldMask,
+} from "../../inputs/TextField/TextField";
 import InputContainer from "../../inputs/InputContainer/InputContainer";
 import Form from "../Form/Form";
 import {
@@ -65,10 +69,14 @@ const PaymentForm = () => {
 
       <InputContainer>
         <ColumnContainer style={{ flex: 2 / 3 }}>
-          <TextField label="Card Number" name="cardNumber" />
+          <TextFieldMask
+            label="Card Number"
+            name="cardNumber"
+            mask="9999 9999 9999 9999"
+          />
         </ColumnContainer>
         <ColumnContainer style={{ flex: 1 / 3 }}>
-          <TextField label="CVC" name="cvc" />
+          <TextFieldMask label="CVC" name="cvc" mask="999" />
         </ColumnContainer>
       </InputContainer>
     </Form>
